@@ -4,14 +4,14 @@ import { supabase } from '../lib/supabase';
 
 export default function Home() {
   const [name, setName] = useState('');
-  const [scores, setScores] = useState({
+  const [scores, setScores] = useState<Record<string, { score: number; total: number }>>({
     quiz: { score: 0, total: 100 },
     lab: { score: 0, total: 100 },
     assign: { score: 0, total: 100 },
     atten: { score: 0, total: 100 },
     exam: { score: 0, total: 100 },
   });
-  const [records, setRecords] = useState([]);
+  const [records, setRecords] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchRecords = useCallback(async () => {
@@ -34,7 +34,7 @@ export default function Home() {
     fetchRecords();
   }, [fetchRecords]);
 
-  const getPercent = (part) => (part.total > 0 ? (part.score / part.total) * 100 : 0);
+  const getPercent = (part: { score: number; total: number }) => (part.total > 0 ? (part.score / part.total) * 100 : 0);
 
   // Weights: Quiz 20%, Lab 30%, Assign 10%, Atten 10%, Exam 30%
   const rawGrade = (
@@ -114,7 +114,7 @@ export default function Home() {
                     onChange={(e) => setScores({...scores, [k]: {...scores[k], score: Number(e.target.value)}})} 
                   />
                   <span className="text-slate-300">/</span>
-                  <input type="number" className="w-full text-center font-black text-blue-600 bg-transparent outline-none" placeholder="100" 
+<input type="number" className="w-full text-center font-black text-blue-600 bg-transparent outline-none" placeholder="100" 
                     onChange={(e) => setScores({...scores, [k]: {...scores[k], total: Number(e.target.value)}})} 
                   />
                 </div>
