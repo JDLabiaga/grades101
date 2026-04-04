@@ -5,7 +5,7 @@ import { supabase } from '../lib/supabase';
 export default function Home() {
   const [name, setName] = useState('');
   const [scores, setScores] = useState<Record<string, { score: number; total: number }>>({
-    quiz: { score: 0, total: 100 },
+    quiz: { score: 0, total: 25 },
     lab: { score: 0, total: 100 },
     assign: { score: 0, total: 100 },
     atten: { score: 0, total: 100 },
@@ -79,7 +79,7 @@ export default function Home() {
         {/* Header Section */}
         <div className="p-8 bg-slate-900 text-white flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
-            <h1 className="text-3xl font-black tracking-tight uppercase">Midterm Grade Portal</h1>
+            <h1 className="text-3xl font-black tracking-tight uppercase">GRADE PORTAL</h1>
             <p className="text-blue-400 text-xs font-bold tracking-widest uppercase mt-1">Passi City College • IT Dept</p>
           </div>
           <div className="bg-blue-600 px-8 py-4 rounded-2xl text-center shadow-lg border border-blue-400">
@@ -114,7 +114,7 @@ export default function Home() {
                     onChange={(e) => setScores({...scores, [k]: {...scores[k], score: Number(e.target.value)}})} 
                   />
                   <span className="text-slate-300">/</span>
-<input type="number" className="w-full text-center font-black text-blue-600 bg-transparent outline-none" placeholder="100" 
+                  <input type="number" className="w-full text-center font-black text-blue-600 bg-transparent outline-none" placeholder={String(scores[k as keyof typeof scores].total)}
                     onChange={(e) => setScores({...scores, [k]: {...scores[k], total: Number(e.target.value)}})} 
                   />
                 </div>
